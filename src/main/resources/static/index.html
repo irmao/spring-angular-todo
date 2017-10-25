@@ -1,0 +1,76 @@
+<!doctype html>
+<html ng-app="poc">
+  
+  <head>
+    <!-- Angular JS -->
+    <script src="/webjars/angularjs/1.6.6/angular.min.js"></script>
+    
+    <!-- Angular Busy -->
+    <script src="/webjars/angular-busy/4.1.1/angular-busy.min.js"></script>
+	
+	<!-- Bootstrap required scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    
+    <!-- Angular Busy -->
+   	<link rel="stylesheet" href="/webjars/angular-busy/4.1.1/angular-busy.min.css"/>
+    
+    <!-- Application scripts -->
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="controller/HomePageController.js"></script>
+    <script type="text/javascript" src="service/HomePageService.js"></script>
+    <script type="text/javascript" src="service/RequestService.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/application.css">
+  </head>
+  
+  <body>
+    <div ng-controller="HomePageController as ctrl" ng-init="ctrl.init()" cg-busy="ctrl.promise" class="col-sm-12">
+      <h1>TODO</h1>
+      
+      <div style="border: 1px solid lightgrey; width: 96%; border-radius: 12px; padding: 6px;" class="col-sm-12">
+      	<div class="row">
+      		<h5 class="col-sm-12">Adicionar novo item</h5>
+      	</div>
+      		<form name="addTaskForm" class="row">
+		      	<div class="col-sm-3">
+		      		<label>Descrição</label> 
+		      		<input type="text" ng-model="ctrl.descriptionToAdd" 
+		      			size="80" class="form-control"
+		      			ng-required="true"/>
+				</div>
+				
+				<div class="col-sm-3">
+		      		<label>Atribuído para</label> 
+		      		<select ng-model="ctrl.userToAdd" 
+		      			ng-options="user.name for user in ctrl.allUsers" 
+		      			class="form-control" 
+		      			ng-required="true">
+	      			</select>
+				</div>
+				
+				<div class="col-sm-3">
+		      		<label>Data limite</label> 
+		      		<input type="date" ng-model="ctrl.dueDateToAdd" class="form-control" ng-required="true"/>
+				</div>
+				
+				<div>
+					<label>&nbsp;</label>
+					<button class="form-control btn btn-primary" ng-click="ctrl.addTask()" ng-disabled="!addTaskForm.$valid">Adicionar</button>
+				</div>
+			</form>
+      </div>
+      
+      
+   	  <div ng-class="{'card-done': task.done, 'card': !task.done}" ng-repeat="task in ctrl.allTasks | orderBy: 'id' : true">
+       	<h4 class="card-title">{{::task.description}}</h4>
+       	{{::task.id}}
+       	{{::task.user.name}}, concluir até {{::task.dueDate | date : 'd/MMM/yyyy'}}
+       	<button ng-if="!task.done" class="btn btn-secondary" style="max-width: 6rem;" 
+       		ng-click="ctrl.markDone(task.id)">Concluído</button>
+	  </div>
+    </div>
+  </body>
+</html>
