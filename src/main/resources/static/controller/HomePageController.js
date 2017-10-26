@@ -10,8 +10,24 @@ function HomePageController(HomePageService) {
 	var self = this;
 	
 	self.init = function() {
+		HomePageService.init();
+		
 		self.allUsers = [];
 		
+		self.loadAllUsers();
+		self.loadAllTasks();
+		
+		self.BACKEND_OPTIONS = [
+			{label: 'Java', option: HomePageService.JAVA},
+			{label: 'C#', option: HomePageService.CSHARP}	
+		];
+		
+		self.selectedBackend = self.BACKEND_OPTIONS[0];
+		HomePageService.selectBackend(self.selectedBackend.option);
+	}
+	
+	self.updateBackend = function() {
+		HomePageService.selectBackend(self.selectedBackend.option);
 		self.loadAllUsers();
 		self.loadAllTasks();
 	}
