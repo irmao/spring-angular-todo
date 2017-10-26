@@ -35,13 +35,14 @@
       		<h5 class="col-sm-12">Serviço de backend</h5>
       	</div>
       	<form name="chooseBackendForm">
-	      	<label ng-repeat="opt in ctrl.BACKEND_OPTIONS track by $index">
-	    		<input type="radio" class="form-control" 
-	    			ng-model="ctrl.selectedBackend"
-	    			ng-value="ctrl.BACKEND_OPTIONS[$index]"
-	    			ng-change="ctrl.updateBackend()">
-	    		{{::opt.label}}
-	    	</label>
+      		<div ng-repeat="opt in ctrl.BACKEND_OPTIONS track by $index" class="form-group">
+	      		<input type="radio" class="sm-col-4" 
+	    				ng-model="ctrl.selectedBackend"
+	    				ng-value="ctrl.BACKEND_OPTIONS[$index]"
+	    				ng-change="ctrl.updateBackend()">
+	      		<span class="sm-col-4">{{::opt.label}}</span>
+	      		<input type="text" class="sm-col-4" ng-model="ctrl.BACKEND_OPTIONS[$index].url" size="40"/>
+	    	</div>
       	</form>
       </div>
       

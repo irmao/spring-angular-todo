@@ -14,20 +14,20 @@ function HomePageController(HomePageService) {
 		
 		self.allUsers = [];
 		
-		self.loadAllUsers();
-		self.loadAllTasks();
-		
 		self.BACKEND_OPTIONS = [
-			{label: 'Java', option: HomePageService.JAVA},
-			{label: 'C#', option: HomePageService.CSHARP}	
+			{label: 'Java', option: HomePageService.JAVA, url: 'http://10.10.54.45:8080/api/'},
+			{label: 'C#', option: HomePageService.CSHARP, url: 'http://10.10.54.133:5000/api/'}	
 		];
 		
 		self.selectedBackend = self.BACKEND_OPTIONS[0];
-		HomePageService.selectBackend(self.selectedBackend.option);
+		HomePageService.setBaseUrl(self.selectedBackend.url);
+		
+		self.loadAllUsers();
+		self.loadAllTasks();
 	}
 	
 	self.updateBackend = function() {
-		HomePageService.selectBackend(self.selectedBackend.option);
+		HomePageService.setBaseUrl(self.selectedBackend.url);
 		self.loadAllUsers();
 		self.loadAllTasks();
 	}

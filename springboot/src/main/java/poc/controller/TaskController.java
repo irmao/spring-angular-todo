@@ -18,7 +18,7 @@ import poc.repository.TaskRepository;
  * Controls the endpoints related to Task operations.
  */
 @RestController
-@RequestMapping("/task")
+@RequestMapping("/api/task")
 public class TaskController {
 	
 	/** The task repository. */

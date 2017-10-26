@@ -16,7 +16,7 @@ import poc.repository.UserRepository;
  * Controls the endpoints related to User operations
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 	
 	/** The user repository. */
