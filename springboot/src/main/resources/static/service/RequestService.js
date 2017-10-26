@@ -3,7 +3,7 @@ angular.module('poc').service('RequestService', RequestService);
 RequestService.$inject = [ '$http' ];
 		
 function RequestService ($http) {
-	var REQUEST_TIMEOUT = 1000;
+	var REQUEST_TIMEOUT = 10000;
 	
 	var self = this;
 	
